@@ -3,12 +3,7 @@ name: ci_cd team commit
 on:
   push:
     branches:
-      - main
-      - team_branch
-  pull_request:
-    branches:
-      - main
-      - team_branch 
+      - "*"
 
 jobs:
   lint-python:
