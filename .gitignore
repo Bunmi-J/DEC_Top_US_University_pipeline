@@ -9,9 +9,8 @@ airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
-Terraform/variables.tf
 Terraform/terraform.tfstate
 Terraform/terraform.tfstate.backup
 Terraform/.terraform
 Terraform/.terraform.lock.hcl
-*exclude/*
+*test/*

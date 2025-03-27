@@ -2,6 +2,7 @@ import logging
 
 import awswrangler as wr
 import boto3
+
 from airflow.models import Variable
 from dags.function.extraction import match_universities
 

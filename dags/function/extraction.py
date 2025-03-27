@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.INFO)
 
 # API Key
 api_key = Variable.get("api_key")
-# api_key = "acjhKaDgvteINZedaIrBzf5gdMskTNfN4w31hJqs"
 
 # URLs
 unirank_url = "https://www.4icu.org/us/"
@@ -42,11 +41,10 @@ def scrape_universities():
             for rank, row in enumerate(rows[:1000], start=1):
                 columns = row.find_all("td")
                 if columns:
-                    rank = columns[0].text.strip()
                     uni_name = columns[1].text.strip()
                     location = columns[2].text.strip() 
                     universities.append((rank, uni_name, location))
-        uni = pd.DataFrame(universities, 
+        uni = pd.DataFrame(universities,
                            columns=["Rank", "University", "Location"])
         uni.to_csv("/usr/local/airflow/dags/universities.csv", index=False)
         logging.info("Scraped and saved university data successfully.")
@@ -255,7 +253,7 @@ def match_universities():
 
         matched_results = []
         # Get school names from the 'name' column of the DataFrame
-        api_school_names = df['name'].tolist() 
+        api_school_names = df['name'].tolist()
 
         for rank, scraped_name, location in uni.itertuples(index=False):
             match, score, index = process.extractOne(

@@ -2,7 +2,6 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-
 from function.extraction import (concurrent_fetch_pages, match_universities,
                                  scrape_universities)
 from function.load_to_s3 import transform_to_s3_parquet
