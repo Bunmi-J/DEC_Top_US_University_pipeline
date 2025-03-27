@@ -1,0 +1,19 @@
+// IAM policy to get, create, list and put Bucket
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:Get*",
+                "s3:Put*",
+                "s3:CreateBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*"
+            ]
+        }
+    ]
+}
