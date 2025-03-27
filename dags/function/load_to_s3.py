@@ -1,9 +1,8 @@
 import logging
+import boto3
 
 import awswrangler as wr
-import boto3
 from airflow.models import Variable
-
 from function.extraction import match_universities
 
 logging.basicConfig(format="%(asctime)s %(message)s")
