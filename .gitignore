@@ -13,5 +13,5 @@ Terraform/terraform.tfstate
 Terraform/terraform.tfstate.backup
 Terraform/.terraform
 Terraform/.terraform.lock.hcl
-tests/*/*
-.astro/*/*
+tests/*
+.astro/*
