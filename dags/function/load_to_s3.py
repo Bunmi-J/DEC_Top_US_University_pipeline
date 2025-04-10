@@ -1,48 +1,102 @@
 import logging
-import boto3
+import pandas as pd
+import json
 
 import awswrangler as wr
-from airflow.models import Variable
-from function.extraction import match_universities
+from function.session import aws_session
+from function.config import output_unirank, output_score_card
 
 logging.basicConfig(format="%(asctime)s %(message)s")
 
 
-def aws_session():
+def raw_scorecard_to_s3():
     """
-    setting up aws boto3 session credentials
-    """
-    session = boto3.Session(
-        aws_access_key_id=Variable.get("access_key"),
-        aws_secret_access_key=Variable.get("secret_key"),
-        region_name="eu-west-2",
-    )
-    return session
+    Fetches scorecard data from a local JSON file, processes it into a
+    DataFrame, and writes the data to an S3 bucket in JSON format.
 
+    The data is saved in overwrite mode under the path
+    "s3://top-university-bucket/raw/". The function uses a boto3 session
+    established through `aws_session()`.
 
-def transform_to_s3_parquet():
-    """
-    This function fetches country data, processes it,
-    and writes it to S3 in Parquet format.
+    Raises:
+        ValueError: If the loaded DataFrame is empty or None.
+        Exception: If any error occurs during reading or writing operations.
     """
     try:
-        # Fetch the country data (ensure this is a pandas DataFrame)
-        match_uni = match_universities()
-
-        # Check if the data is not None before proceeding
-        if match_uni is not None and not match_uni.empty:
-            # Write the data to S3 in Parquet format
-            wr.s3.to_parquet(
-                df=match_uni,
-                path="s3://top-university-bucket/transform/",
-                boto3_session=aws_session(),
-                mode="overwrite",
-                dataset=True,
+        with open(output_score_card, "r", encoding='utf-8') as f:
+            score_card_data = pd.DataFrame(json.load(f))
+        if score_card_data is None or score_card_data.empty:
+            raise ValueError("No data available to write to S3.")
+        wr.s3.to_json(
+            df=score_card_data,
+            path="s3://top-university-bucket/raw/scorecard/",
+            boto3_session=aws_session(),
+            mode="overwrite",
+            dataset=True,
+            orient="records",
+            index=False,
             )
-
-            logging.info("Data successfully written to S3 in Parquet format.")
-        else:
-            logging.warning("No data available to write to S3.")
-
+        logging.info("Data successfully written to S3 in Parquet format.")
     except Exception as e:
-        raise Exception(f"An error occurred: {str(e)}")
+        raise Exception(f"An error occurred: {e}")
+
+
+def unirank_to_s3():
+    """
+    Fetches university ranking data from a local CSV file, processes it into a
+    DataFrame, and writes the data to an S3 bucket in Parquet format.
+
+    The data is saved in overwrite mode under the path
+    "s3://top-university-bucket/raw/". The function uses a boto3 session
+    established through `aws_session()`.
+
+    Raises:
+        ValueError: If the loaded DataFrame is empty or None.
+        Exception: If any error occurs during reading or writing operations.
+    """
+    try:
+        with open(output_unirank, "r") as f:
+            uni_rank_data = pd.read_csv(f)
+        if uni_rank_data is None or uni_rank_data.empty:
+            raise ValueError("No data available to write to S3.")
+        wr.s3.to_parquet(
+            df=uni_rank_data,
+            path="s3://top-university-bucket/raw/unirank/",
+            boto3_session=aws_session(),
+            mode="overwrite",
+            dataset=True,
+        )
+        logging.info("Data successfully written to S3 in Parquet format.")
+    except Exception as e:
+        raise Exception(f"An error occurred: {e}")
+
+
+# def transform_to_s3():
+#     """
+#     Fetches transformed university ranking data from a tmp CSV file,
+#     processes it into a DataFrame, and writes the data to an S3 bucket in
+#     Parquet format.
+
+#     The data is saved in overwrite mode under the path
+#     "s3://top-university-bucket/transform/cleaned/". The function uses a boto3
+#     session established through `aws_session()`.
+
+#     Raises:
+#         ValueError: If the loaded DataFrame is empty or None.
+#         Exception: If any error occurs during reading or writing operations.
+#     """
+#     try:
+#         with open(output_transform, "r") as f:
+#             cleaned_uni = pd.read_csv(f)
+#         if cleaned_uni is None or cleaned_uni.empty:
+#             raise ValueError("No data available to write to S3.")
+#         wr.s3.to_parquet(
+#             df=cleaned_uni,
+#             path="s3://top-university-bucket/transform/cleaned/",
+#             boto3_session=aws_session(),
+#             mode="overwrite",
+#             dataset=True,
+#         )
+#         logging.info("Data successfully written to S3 in Parquet format.")
+#     except Exception as e:
+#         raise Exception(f"An error occurred: {e}")

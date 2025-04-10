@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "Top_university_bucket"
+    bucket = "terraform-backend-unirank"
     key    = "backend/terraform/state"
     region = "us-east-1"
   }

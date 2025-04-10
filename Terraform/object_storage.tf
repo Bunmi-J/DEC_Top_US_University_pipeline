@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "dec_hackathon_team1" {
-  bucket = "top-university-bucket" 
+  bucket = "top-university-bucket"
 }
 
 resource "aws_s3_bucket_versioning" "hackathon-bucket" {

@@ -9,7 +9,7 @@ from cosmos.profiles import SnowflakeUserPasswordProfileMapping
 
 from dags.function.extraction import scrape_universities
 
-dbt_project_path = Path("/usr/local/airflow/dags/dbt_project")
+dbt_project_path = Path("/usr/local/airflow/dags/dbt_practice/uni_rank/")
 
 profile_config = ProfileConfig(
     profile_name="default",
@@ -17,8 +17,8 @@ profile_config = ProfileConfig(
     profile_mapping=SnowflakeUserPasswordProfileMapping(
         conn_id="snow_flake",
         profile_args={
-            "database": "unirank",
-            "schema": "public"
+            "database": "scorecard",
+            "schema": "uni_ranking"
             },
         ))
 
@@ -30,7 +30,7 @@ default_args = {
 with DAG(
     dag_id="dbt_snowflake",
     start_date=datetime(2025, 3, 25),
-    schedule_interval="@daily",
+    # schedule_interval="@daily",
     default_args=default_args,
 ) as dag:
 

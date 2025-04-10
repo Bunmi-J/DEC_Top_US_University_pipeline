@@ -1,8 +1,7 @@
 # Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
-apache-airflow-providers-snowflake
-astronomer-cosmos
-rapidfuzz
-fake_useragent
-beautifulsoup4
-awswrangler
-# astro-run-dag # This package is needed for the astro run command. It will be removed before a deployte
+apache-airflow-providers-snowflake==6.1.1
+astronomer-cosmos==1.9.2
+rapidfuzz==3.12.2
+fake_useragent==2.1.0
+beautifulsoup4==4.13.3
+awswrangler==3.11.0

@@ -11,7 +11,9 @@ airflow.cfg
 airflow.db
 Terraform/terraform.tfstate
 Terraform/terraform.tfstate.backup
-Terraform/.terraform
+Terraform/.terraform/*
 Terraform/.terraform.lock.hcl
 tests/*
 *.astro/*
+data/*
+dbt_practice/logs/*
