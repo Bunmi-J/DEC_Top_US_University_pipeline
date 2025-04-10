@@ -16,3 +16,6 @@ Terraform/.terraform.lock.hcl
 tests/*
 *.astro/*
 data/*
+*/target/
+*/dbt_packages/
+*/logs/
