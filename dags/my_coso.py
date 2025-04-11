@@ -9,7 +9,7 @@ from cosmos.profiles import SnowflakeUserPasswordProfileMapping
 
 from dags.function.extraction import scrape_universities
 
-dbt_project_path = Path("/usr/local/airflow/dags/dbt_work/uni_rank/")
+dbt_project_path = Path("/usr/local/airflow/dags/dbt_job/uni_rank/")
 
 profile_config = ProfileConfig(
     profile_name="default",
