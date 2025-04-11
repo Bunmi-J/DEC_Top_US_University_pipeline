@@ -17,5 +17,5 @@ tests/*
 *.astro/*
 data/*
 */target/
-*/dbt_packages/
+*dbt_packages/
 */logs/

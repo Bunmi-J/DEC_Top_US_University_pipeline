@@ -23,9 +23,10 @@ fields = ",".join([
     "latest.school.accreditor", "latest.school.price_calculator_url",
     "latest.school.online_only", "latest.school.main_campus",
     "latest.school.institutional_characteristics.level",
-    "latest.school.open_admissions_policy", "latest.degrees_awarded.highest",
+    "latest.school.open_admissions_policy", "latest.aid.pell_grant_rate",
+    "latest.school.degrees_awarded.highest",
     "latest.school.degrees_awarded.predominant", "latest.cost.booksupply",
-    "latest.admissions.test_requirements", "latest.aid.pell_grant_rate",
+    "latest.admissions.test_requirements",
     "latest.admissions.sat_scores.average.overall",
     "latest.school.carnegie_basic",
     "latest.admissions.act_scores.50th_percentile.cumulative",
@@ -57,7 +58,7 @@ column_mapping = {
     "latest.school.name": "school_name",
     "latest.school.address": "address",
     "latest.school.city": "city",
-    "latest.school.state": "state",
+    "latest.school.state": "state_code",
     "latest.school.state_fips": "state_fips",
     "latest.school.region_id": "region_id",
     "latest.school.locale": "school_locale",
@@ -102,10 +103,3 @@ column_mapping = {
     "latest.student.enrollment.undergrad_12_month":
     "undergrad_enrollment_12_month"
 }
-
-
-# # Assuming you have a DataFrame 'df' with the original columns
-# df.columns = [column_mapping.get(col, col) for col in df.columns]
-
-# # Display the updated columns
-# print(df.columns)

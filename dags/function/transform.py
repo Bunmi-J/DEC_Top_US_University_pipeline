@@ -145,6 +145,7 @@ def transform_data(score_threshold=95):
                ]] = final[['address', 'price_calculator_url',
                            'school_accreditor']].fillna('Not Specified')
         final[columns_to_int] = final[columns_to_int].astype(int)
+        final['main_campus'] = final['main_campus'].astype(bool)
         logging.info("University matching and transformation completed "
                      "successfully.")
         wr.s3.to_parquet(
