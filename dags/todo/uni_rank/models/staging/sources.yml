@@ -1,0 +1,121 @@
+version: 2
+
+sources:
+  - name: uni_ranking
+    tables:
+      - name: carnegie_basic_dict
+        columns:
+          - name: carnegiebasic_id
+            data_type: number
+          - name: carnegiebasic
+            data_type: varchar
+
+      - name: locale
+        columns:
+          - name: locale_id
+            data_type: number
+          - name: locale
+            data_type: varchar
+
+      - name: region
+        columns:
+          - name: region_id
+            data_type: number
+          - name: region
+            data_type: varchar
+
+      - name: school_data
+        columns:
+          - name: rank
+            data_type: number
+          - name: id
+            data_type: number
+          - name: school_name
+            data_type: varchar
+          - name: address
+            data_type: varchar
+          - name: city
+            data_type: varchar
+          - name: state
+            data_type: varchar
+          - name: state_fips
+            data_type: number
+          - name: region_id
+            data_type: number
+          - name: school_locale
+            data_type: number
+          - name: school_url
+            data_type: varchar
+          - name: school_ownership
+            data_type: number
+          - name: school_accreditor
+            data_type: varchar
+          - name: price_calculator_url
+            data_type: varchar
+          - name: online_only
+            data_type: number
+          - name: main_campus
+            data_type: number
+          - name: institutional_characteristics_level
+            data_type: number
+          - name: open_admissions_policy
+            data_type: number
+          - name: degrees_awarded_predominant
+            data_type: number
+          - name: booksupply_cost
+            data_type: float
+          - name: test_requirements
+            data_type: float
+          - name: pell_grant_rate
+            data_type: float
+          - name: sat_scores_overall_average
+            data_type: number
+          - name: carnegie_basic
+            data_type: number
+          - name: act_scores_50th_percentile
+            data_type: number
+          - name: admission_rate_overall
+            data_type: float
+          - name: completion_rate_suppressed
+            data_type: float
+          - name: retention_rate_full_time
+            data_type: float
+          - name: federal_loan_rate
+            data_type: float
+          - name: cost_of_qttendance
+            data_type: float
+          - name: avg_net_price_overall
+            data_type: float
+          - name: tuition_in_state
+            data_type: float
+          - name: tuition_out_of_state
+            data_type: float
+          - name: roomboard_offcampus
+            data_type: float
+          - name: roomboard_oncampus
+            data_type: float
+          - name: otherexpense_oncampus
+            data_type: float
+          - name: otherexpense_offcampus
+            data_type: float
+          - name: student_size
+            data_type: number
+          - name: student_demographics_men
+            data_type: float
+          - name: student_demographics_women
+            data_type: float
+          - name: faculty_demographics_men
+            data_type: float
+          - name: faculty_demographics_women
+            data_type: float
+          - name: grad_enrollment_12_month
+            data_type: number
+          - name: undergrad_enrollment_12_month
+            data_type: number
+
+      - name: state_fids
+        columns:
+          - name: state_fips_id
+            data_type: number
+          - name: state
+            data_type: varchar
